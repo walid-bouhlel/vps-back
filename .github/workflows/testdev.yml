@@ -30,5 +30,4 @@ jobs:
             whoami
             ls -al
             echo $RSYNC_STDOUT
-      - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+            composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
