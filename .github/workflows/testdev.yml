@@ -31,4 +31,5 @@ jobs:
             ls -al
             echo $RSYNC_STDOUT
             cd /var/www/vps-back
+            php -r "file_exists('.env') || copy('.env.example', '.env');"
             composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
