@@ -30,4 +30,5 @@ jobs:
             whoami
             ls -al
             echo $RSYNC_STDOUT
+            cd /var/www/vps-back
             composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
