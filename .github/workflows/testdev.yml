@@ -31,6 +31,7 @@ jobs:
             ls -al
             echo $RSYNC_STDOUT
             cd /var/www/vps-back
+            chmod -R 777 storage bootstrap/cache
             composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
             php -r "file_exists('.env') || copy('.env.example', '.env');"
             php artisan key:generate
