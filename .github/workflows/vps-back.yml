@@ -1,4 +1,4 @@
-name: testdev
+name: vpsback
 
 on:
   push:
