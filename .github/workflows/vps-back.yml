@@ -8,7 +8,7 @@ on:
 
 jobs:
   # Single deploy job since we're just deploying
-  deploy_on_testdev:
+  deploy_on_vps-back.bouhlel.cloud:
 
     runs-on: ubuntu-latest
     steps:
