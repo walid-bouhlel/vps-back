@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Traits;
+namespace App\Traits;
 
 
 
@@ -13,6 +13,16 @@ trait HttpResponses{
             'message'=>$message,
             'data'=>$data
         ], $code);
+    }
+
+    protected function erroe ($data, $message=null, $code) {
+        return response()->json([
+            'status'=> 'Error has occured...',
+            'message'=>$message,
+            'data'=>$data
+        ], $code);
+
+
     }
 
 }
