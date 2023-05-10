@@ -11,7 +11,7 @@ class VpsController extends Controller
      */
     public function index()
     {
-        return response()->json('Vpss');
+        return response()->json('Vpss of');
     }
 
     /**
