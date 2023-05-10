@@ -22,9 +22,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-
+//public
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/register',[AuthController::class,'register']);
-Route::post('/logout',[AuthController::class,'logout']);
 
-Route::resource('/vps',VpsController::class);
+
+//protected
+
+
+Route::group(['middleware'=>['auth:sanctum']], function() {
+    Route::post('/logout',[AuthController::class,'logout']);
+    Route::resource('/vps',VpsController::class);
+
+});
