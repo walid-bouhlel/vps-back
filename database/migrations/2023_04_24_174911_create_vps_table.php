@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('vps', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('server_name');
+            $table->string('description');
+            $table->string('instance');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
