@@ -25,6 +25,7 @@ Route::post('/login',[AuthController::class,'login']);
 Route::post('/register',[AuthController::class,'register']);
 //protected
 Route::group(['middleware'=>['auth:sanctum']], function() {
+    Route::get('/check',[AuthController::class,'check']);
     Route::post('/logout',[AuthController::class,'logout']);
     Route::resource('/vps',VpsController::class);
 });

@@ -6,7 +6,6 @@ use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use App\Traits\HttpResponses;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -50,6 +49,17 @@ class AuthController extends Controller
 
     public function logout()
     {
-        return response()->json('this is my logout method');
+        // Revoke the token that was used to authenticate the current request...
+        Auth::user()->currentAccessToken()->delete();
+        return $this->succes([
+            'message'=>'You have successfully been logout'
+        ]);
+        //return response()->json('this is my logout method');
     }
+
+    public function check()
+    {
+       return Auth::user();
+    }
+
 }
