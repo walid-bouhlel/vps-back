@@ -47,15 +47,15 @@ class AuthController extends Controller
         ]);
     }
 
-    //public function logout()
-    //{
-        // Revoke the token that was used to authenticate the current request...
-    //    Auth::user()->currentAccessToken()->delete();
-    //    return $this->succes([
-    //        'message'=>'You have successfully been logout'
-    //    ]);
-        //return response()->json('this is my logout method');
-    //}
+    public function logout()
+    {
+      // Revoke the token that was used to authenticate the current request...
+        Auth::user()->currentAccessToken()->delete();
+        return $this->succes([
+            'message'=>'You have successfully been logout'
+        ]);
+      return response()->json('this is my logout method');
+    }
 
     public function check()
     {
