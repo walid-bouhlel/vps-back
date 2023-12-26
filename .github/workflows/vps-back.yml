@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v3
 
 
-      - name: Deploy to test server
+      - name: Deploy to the prod server
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_VPSBACK }}
