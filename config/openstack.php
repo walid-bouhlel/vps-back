@@ -5,4 +5,6 @@ return [
     'project_id' => env('OPENSTACK_PROJECT_ID'),
     'auth_url' => env('OPENSTACK_AUTH_URL'),
     'region' => env('OPENSTACK_REGION'),
+    'user_id' => env('OPENSTACK_USER_ID'),
+    
 ];

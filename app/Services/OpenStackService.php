@@ -14,6 +14,7 @@ class OpenStackService
             'authUrl' => config('openstack.auth_url'),
             'region' => config('openstack.region'),
             'user' => [
+                'id' => config('openstack.user_id'),
                 'name' => config('openstack.username'),
                 'password' => config('openstack.password'),
                 'domain' => ['id' => 'default'],
