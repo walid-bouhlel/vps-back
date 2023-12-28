@@ -6,5 +6,6 @@ return [
     'auth_url' => env('OPENSTACK_AUTH_URL'),
     'region' => env('OPENSTACK_REGION'),
     'user_id' => env('OPENSTACK_USER_ID'),
+    'domain_id' => env('OPENSTACK_DOMAIN_ID'),
     
 ];

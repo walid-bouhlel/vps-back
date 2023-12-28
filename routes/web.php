@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OpenStack\AuthController;
+use App\Http\Controllers\OpenStack\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('ajax/test',  [AuthController::class, 'test']);
+Route::get('ajax2/test',  [TestController::class, 'index']);

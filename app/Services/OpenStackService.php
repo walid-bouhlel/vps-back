@@ -17,7 +17,7 @@ class OpenStackService
                 'id' => config('openstack.user_id'),
                 'name' => config('openstack.username'),
                 'password' => config('openstack.password'),
-                'domain' => ['id' => 'default'],
+                'domain' => ['id' => config('openstack.domain_id')],
             ],
             'scope' => ['project' => ['id' => config('openstack.project_id')]],
         ]);
@@ -25,7 +25,7 @@ class OpenStackService
 
     public function createKeyPair()
     {
-        $identity = $this->openstack->identityV3(['region' => config('openstack.region')]);
+        $identity = $this->openstack->identityV3();
 
         $credential = $identity->getCredential('credentialId');
         return $credential->retrieve();
