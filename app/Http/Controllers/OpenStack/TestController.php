@@ -30,8 +30,10 @@ class TestController extends Controller
         $identity = $openstack->identityV3();
 
         foreach ($identity->listUsers() as $user) {
+            $users[] = $user;
+
         }
 
-        return response()->json($user);
+        return response()->json($users);
     }
 }
