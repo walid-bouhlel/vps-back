@@ -35,5 +35,5 @@ jobs:
             composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
             php -r "file_exists('.env') || copy('.env.example', '.env');"
             php artisan key:generate
-            composer update
+            composer install
             php artisan migrate
