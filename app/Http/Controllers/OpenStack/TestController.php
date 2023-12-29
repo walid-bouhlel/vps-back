@@ -25,15 +25,20 @@ class TestController extends Controller
                     'id' => config('openstack.project_id')
                 ]
             ]
-
         ]);
         $identity = $openstack->identityV3();
+        $compute = $openstack->computeV2(['region' => config('openstack.region')]);
+        $servers = $compute->listServers(true);
 
-        foreach ($identity->listUsers() as $user) {
-            $users[] = $user;
+foreach ($servers as $server) {
+    $listservers[] = $server;
+}
 
-        }
+        //foreach ($identity->listUsers() as $user) {
+        //    $users[] = $user;
+        //
+        //}
 
-        return response()->json($users);
+        return response()->json($listservers);
     }
 }
