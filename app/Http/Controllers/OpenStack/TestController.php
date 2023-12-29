@@ -28,17 +28,23 @@ class TestController extends Controller
         ]);
         $identity = $openstack->identityV3();
         $compute = $openstack->computeV2(['region' => config('openstack.region')]);
-        $servers = $compute->listServers(true);
-
-foreach ($servers as $server) {
-    $listservers[] = $server;
-}
+        $keyPairName = 'my-keypair5';
+        $keyPair = $compute->createKeypair([
+            'name' => $keyPairName,
+        ]);
+        $publicKey = $keyPair->getAliases();
+        
+        
+        //$servers = $compute->listServers(true);
+        //foreach ($servers as $server) {
+        //$listservers[] = $server;
+        //}
 
         //foreach ($identity->listUsers() as $user) {
         //    $users[] = $user;
         //
         //}
 
-        return response()->json($listservers);
+        return response()->json($publicKey);
     }
 }

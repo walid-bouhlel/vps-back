@@ -9,6 +9,6 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     public function test(Request $request, OpenStackService $openStackService){
-        return $openStackService->createKeyPair();
+        return response()->json($$openStackService->createKeyPair());
     }
 }
