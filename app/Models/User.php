@@ -45,4 +45,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function saveKeyPairInformation($keyPair)
+    {
+        $this->update([
+            'key_name' => $keyPair['name'],
+            'public_key' => $keyPair['publicKey'],
+            'private_key' => $keyPair['privateKey'],
+            'key_fingerprint' => $keyPair['finger_print'],
+        ]);
+    }
 }
