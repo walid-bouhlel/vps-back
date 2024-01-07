@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use OpenStack\OpenStack;
+use App\Models\Flavor;
 
 class OpenStackService
 {
@@ -68,6 +69,25 @@ class OpenStackService
 
     return $flavorsWithDetails;
 }
+public function storeChosenFlavor($flavorId)
+    {
+        $compute = $this->openstack->computeV2(['region' => config('openstack.region')]);
+        $flavorDetails = $compute->getFlavor(['id' => $flavorId]);
+        $flavorDetails->retrieve();
+        $swapValue = ($flavorDetails->swap !== '' && $flavorDetails->swap !== null) ? $flavorDetails->swap : 0;
+        // Store flavor in the "flavors" table
+        $createdFlavor = Flavor::create([
+            'stackId'=> $flavorDetails->id,
+            'name' => $flavorDetails->name,
+            'disk' => $flavorDetails->disk,
+            'ram' => $flavorDetails->ram,
+            'swap' => $swapValue,
+            'vcpus' => $flavorDetails->vcpus,
+            
+        ]);
+
+        return $createdFlavor;
+    }
 
 }
 

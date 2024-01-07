@@ -54,4 +54,25 @@ class TestController extends Controller
 
     }
 
+    public function index3(Request $request, OpenStackService $openStackService)
+    {
+        $flavorId = $request->input('flavorId');
+        $createdFlavor = $openStackService->storeChosenFlavor($flavorId);
+
+        return response()->json([
+            'message' => 'Chosen flavor stored successfully',
+            'flavor' => [
+                'id' => $createdFlavor->id,
+                'Stackid' => $createdFlavor->stackId,
+                'name' => $createdFlavor->name,
+                'disk' => $createdFlavor->disk,
+                'ram' => $createdFlavor->ram,
+                'swap' => $createdFlavor->swap,
+                'vcpus' => $createdFlavor->vcpus,
+            ],
+        ]);
+    }
+
+    
+
 }
