@@ -37,4 +37,38 @@ class OpenStackService
 
         return ['name' => $keyPair->name, 'privateKey' => $keyPair -> privateKey , 'publicKey' => $keyPair -> publicKey , 'finger_print' => $keyPair -> fingerprint ];
     }
+
+
+    public function listAllFlavors()
+{
+    $compute = $this->openstack->computeV2(['region' => config('openstack.region')]);
+    $flavors = iterator_to_array($compute->listFlavors());
+
+    $flavorsWithDetails = [];
+
+    foreach ($flavors as $flavor) {
+        // Use getFlavor to create a local Flavor object with the given ID
+        $flavorDetails = $compute->getFlavor(['id' => $flavor->id]);
+
+        // Use retrieve() to refresh the local Flavor object with the latest details
+        $flavorDetails->retrieve();
+
+        $flavorsWithDetails[] = [
+            'id' => $flavorDetails->id,
+            'name' => $flavorDetails->name,
+            'flavorDetails' => [
+                'disk' => $flavorDetails->disk,
+                'ram' => $flavorDetails->ram,
+                'swap' => $flavorDetails->swap,
+                'vcpus' => $flavorDetails->vcpus,
+                'links' => $flavorDetails->links,
+            ],
+        ];
+    }
+
+    return $flavorsWithDetails;
 }
+
+}
+
+

@@ -20,3 +20,4 @@ Route::get('/', function () {
 });
 Route::get('ajax/test',  [AuthController::class, 'test']);
 Route::get('ajax2/test',  [TestController::class, 'index']);
+Route::get('ajax2/test2',  [TestController::class, 'index2']);
