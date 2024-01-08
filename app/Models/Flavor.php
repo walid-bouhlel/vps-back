@@ -11,6 +11,7 @@ class Flavor extends Model
     protected $fillable = [
         'stackId',
         'name',
+        'nameInStack',
         'disk',
         'ram',
         'swap',

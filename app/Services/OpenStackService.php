@@ -69,7 +69,7 @@ class OpenStackService
 
     return $flavorsWithDetails;
 }
-public function storeChosenFlavor($flavorId)
+public function storeChosenFlavor($flavorId,$name)
     {
         $compute = $this->openstack->computeV2(['region' => config('openstack.region')]);
         $flavorDetails = $compute->getFlavor(['id' => $flavorId]);
@@ -78,7 +78,8 @@ public function storeChosenFlavor($flavorId)
         // Store flavor in the "flavors" table
         $createdFlavor = Flavor::create([
             'stackId'=> $flavorDetails->id,
-            'name' => $flavorDetails->name,
+            'name' => $name,
+            'nameInStack' => $flavorDetails->name,
             'disk' => $flavorDetails->disk,
             'ram' => $flavorDetails->ram,
             'swap' => $swapValue,

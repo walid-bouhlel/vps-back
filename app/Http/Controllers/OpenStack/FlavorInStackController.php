@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use OpenStack\OpenStack;
 use App\Services\OpenStackService;
-class TestController extends Controller
+class FlavorInStackController extends Controller
 {   
     protected $openstack;
   
@@ -48,7 +48,7 @@ class TestController extends Controller
 
         return response()->json($publicKey);
     }
-    public function index2(Request $request, OpenStackService $openStackService)
+    public function getFlavorInStack(Request $request, OpenStackService $openStackService)
     {
         return response()->json($openStackService->listAllFlavors());
 

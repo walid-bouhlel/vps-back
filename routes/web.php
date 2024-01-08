@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\OpenStack\AuthController;
-use App\Http\Controllers\OpenStack\TestController;
+use App\Http\Controllers\OpenStack\FlavorInStackController;
 use Illuminate\Support\Facades\Route;
 
 /*

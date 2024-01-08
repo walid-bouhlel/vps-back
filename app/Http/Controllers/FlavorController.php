@@ -14,11 +14,12 @@ class FlavorController extends Controller
     {
 
         $flavorId = $request->input('flavorId');
+        $flavorName = $request->input('name');
         $existingFlavor = $this->checkFlavorByStackId($flavorId);
         if ($existingFlavor) {
             return response()->json(['error' => 'Flavor with the given stackId already exists.'], 409);
         }
-        $createdFlavor = $openStackService->storeChosenFlavor($flavorId);
+        $createdFlavor = $openStackService->storeChosenFlavor($flavorId,$flavorName);
 
         return response()->json([
             'message' => 'Chosen flavor stored successfully',
@@ -26,6 +27,7 @@ class FlavorController extends Controller
                 'id' => $createdFlavor->id,
                 'Stackid' => $createdFlavor->stackId,
                 'name' => $createdFlavor->name,
+                'nameInStack'=> $createdFlavor->nameInStack,
                 'disk' => $createdFlavor->disk,
                 'ram' => $createdFlavor->ram,
                 'swap' => $createdFlavor->swap,

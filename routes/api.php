@@ -5,6 +5,8 @@ use App\Http\Controllers\VpsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FlavorController;
+use App\Http\Controllers\OpenStack\FlavorInStackController;
+use App\Http\Controllers\DistributionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::post('/login',[AuthController::class,'login']);
     Route::post('/register',[AuthController::class,'register']);
 
+//FLAVOR IN STACK
+Route::get('/flavorstack', [FlavorInStackController::class, 'getFlavorInStack']);
 //FLAVOR
     Route::post('flavor/store', [FlavorController::class, 'storeFlavor']);
     Route::get('/flavor', [FlavorController::class, 'index']);
@@ -36,3 +40,7 @@ Route::group(['middleware'=>['auth:sanctum']], function() {
     Route::post('/logout',[AuthController::class,'logout']);
     Route::resource('/vps',VpsController::class);
 });
+
+
+
+Route::apiResource('distributions', DistributionController::class);
