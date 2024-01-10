@@ -90,6 +90,34 @@ public function storeChosenFlavor($flavorId,$name)
         return $createdFlavor;
     }
 
+    public function listAllImages()
+{
+    $compute = $this->openstack->computeV2(['region' => config('openstack.region')]);
+    $images = iterator_to_array($compute->listImages());
+
+    $imagesWithDetails = [];
+
+    foreach ($images as $image) {
+        
+        $imageDetails = $compute->get<(['id' => $flavor->id]);
+        $flavorDetails->retrieve();
+
+        $flavorsWithDetails[] = [
+            'id' => $flavorDetails->id,
+            'name' => $flavorDetails->name,
+            'flavorDetails' => [
+                'disk' => $flavorDetails->disk,
+                'ram' => $flavorDetails->ram,
+                'swap' => $flavorDetails->swap,
+                'vcpus' => $flavorDetails->vcpus,
+                'links' => $flavorDetails->links,
+            ],
+        ];
+    }
+
+    return $flavorsWithDetails;
+}
+
 }
 
 

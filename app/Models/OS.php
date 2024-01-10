@@ -12,4 +12,5 @@ class OS extends Model
     {
         return $this->belongsTo(Distribution::class);
     }
+    
 }
