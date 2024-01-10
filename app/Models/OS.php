@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class OS extends Model
 {
+    protected $table = 'os';
     use HasFactory;
     protected $fillable = [
         'idInStack',
         'name',
         'nameInStack',
-        'distrubution_id',
+        'distribution_id',
         'version',
     ];
     public function distribution()

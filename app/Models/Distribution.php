@@ -9,6 +9,7 @@ class Distribution extends Model
 {
     use HasFactory;
 
+
     protected $fillable = ['name','logopath'];
 
     public function operatingSystems()

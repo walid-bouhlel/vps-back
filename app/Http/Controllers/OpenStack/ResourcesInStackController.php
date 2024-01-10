@@ -83,7 +83,7 @@ class ResourcesInStackController extends Controller
     public function test(Request $request, OpenStackService $openStackService)
     {
         $imageId = $request->input('imageId');
-        return response()->json($openStackService->getImageDetails());
+        return response()->json($openStackService->getImageDetails($imageId));
     }
 
 }

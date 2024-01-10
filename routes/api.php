@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FlavorController;
 use App\Http\Controllers\OpenStack\ResourcesInStackController;
 use App\Http\Controllers\DistributionController;
+use App\Http\Controllers\OSController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +48,5 @@ Route::group(['middleware'=>['auth:sanctum']], function() {
 
 
 Route::apiResource('distributions', DistributionController::class);
+
+Route::apiResource('os', OSController::class);
