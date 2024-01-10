@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use OpenStack\OpenStack;
 use App\Services\OpenStackService;
-class FlavorInStackController extends Controller
+class ResourcesInStackController extends Controller
 {   
     protected $openstack;
   
@@ -48,9 +48,15 @@ class FlavorInStackController extends Controller
 
         return response()->json($publicKey);
     }
-    public function getFlavorInStack(Request $request, OpenStackService $openStackService)
+    public function getFlavorsInStack(Request $request, OpenStackService $openStackService)
     {
         return response()->json($openStackService->listAllFlavors());
+
+    }
+
+    public function getImagesInStack(Request $request, OpenStackService $openStackService)
+    {
+        return response()->json($openStackService->listAllImages());
 
     }
 
@@ -71,8 +77,13 @@ class FlavorInStackController extends Controller
                 'vcpus' => $createdFlavor->vcpus,
             ],
         ]);
+        
     }
 
-    
+    public function test(Request $request, OpenStackService $openStackService)
+    {
+        $imageId = $request->input('imageId');
+        return response()->json($openStackService->getImageDetails());
+    }
 
 }

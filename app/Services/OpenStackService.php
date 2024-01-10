@@ -99,24 +99,29 @@ public function storeChosenFlavor($flavorId,$name)
 
     foreach ($images as $image) {
         
-        $imageDetails = $compute->get<(['id' => $flavor->id]);
-        $flavorDetails->retrieve();
+        $imageDetails = $compute->getImage(['id' => $image->id]);
+        $imageDetails->retrieve();
 
-        $flavorsWithDetails[] = [
-            'id' => $flavorDetails->id,
-            'name' => $flavorDetails->name,
-            'flavorDetails' => [
-                'disk' => $flavorDetails->disk,
-                'ram' => $flavorDetails->ram,
-                'swap' => $flavorDetails->swap,
-                'vcpus' => $flavorDetails->vcpus,
-                'links' => $flavorDetails->links,
-            ],
+        $ImagesWithDetails[] = [
+            'id' => $imageDetails->id,
+            'name' => $imageDetails->name
         ];
     }
 
-    return $flavorsWithDetails;
+    return $ImagesWithDetails;
 }
+
+    public function getImageDetails($imageId){
+        $compute = $this->openstack->computeV2(['region' => config('openstack.region')]);
+        $imageDetails = $compute->getImage(['id' => $imageId]);
+        $imageDetails->retrieve();
+        $imageWithDetails[] = [
+            'id' => $imageDetails->id,
+            'name' => $imageDetails->name
+        ];
+        return $imageDetails;
+
+    }
 
 }
 
