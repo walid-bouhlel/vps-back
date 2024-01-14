@@ -21,8 +21,13 @@ class OSController extends Controller
      */
     public function store(Request $request, OpenStackService $openStackService)
     {
-        $imageDetails = $openStackService->getImageDetails($request->input('imageId'));
+        $imageId=$request->input('imageId');
+        $imageDetails = $openStackService->getImageDetails($imageId);
         $nameInStack = $imageDetails->name;
+        $existingImage = $this->checkImageByStackId($imageId);
+        if ($existingImage) {
+            return response()->json(['error' => 'Image with the given Id already exists.'], 409);
+        }
         $idInStack = $imageDetails->id;
         $OS = new OS();
         
@@ -63,6 +68,16 @@ class OSController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $os = OS::deleteOS($id);
+
+        if ($os) {
+            return response()->json(['message' => 'OS deleted successfully']);
+        } else {
+            return response()->json(['error' => 'OS not found'], 404);
+        }
+    }
+    public function checkImageByStackId($stackId): ?OS
+    {
+        return OS::where('idInStack', $stackId)->first();
     }
 }

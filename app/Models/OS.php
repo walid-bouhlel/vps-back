@@ -20,5 +20,17 @@ class OS extends Model
     {
         return $this->belongsTo(Distribution::class);
     }
+
+    
+    public static function deleteOS(int $OSId)
+    {
+        $OS = self::find($OSId);
+
+        if ($OS) {
+            return $OS->delete();
+        }
+
+        return null;
+    }
     
 }
