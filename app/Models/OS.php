@@ -32,5 +32,9 @@ class OS extends Model
 
         return null;
     }
+    public static function getAllOSs()
+    {
+        return self::all();
+    }
     
 }

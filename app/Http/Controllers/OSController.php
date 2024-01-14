@@ -13,7 +13,8 @@ class OSController extends Controller
      */
     public function index()
     {
-        //
+        $os = OS::getAllOSs();
+        return response()->json($os);
     }
 
     /**
@@ -79,5 +80,10 @@ class OSController extends Controller
     public function checkImageByStackId($stackId): ?OS
     {
         return OS::where('idInStack', $stackId)->first();
+    }
+
+    public static function getOS(int $OSId)
+    {
+        return self::find($OSId);
     }
 }
