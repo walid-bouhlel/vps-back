@@ -123,6 +123,20 @@ public function storeChosenFlavor($flavorId,$name)
 
     }
 
+    public function createServer($imageId,$flavorId,$userId){
+        $compute = $this->openstack->computeV2(['region' => config('openstack.region')]);
+        $options = [
+            'name'     => $userId.'vps',
+            'imageId'  => $imageId,
+            'flavorId' => $flavorId,
+            //'key_name' => 'vps13',
+            'networks'  => [
+                ['uuid' => 'e70d1990-f46c-43db-b5e0-6da48067139e']
+            ],
+            //'metadata' => ['foo' => 'bar'],
+            'userData' => base64_encode('echo "Hello World. The time is now $(date -R)!" | tee /root/output.txt')
+        ];
+        $server = $compute->createServer($options);
+        
+    }
 }
-
-

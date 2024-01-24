@@ -37,7 +37,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::get('/flavor', [FlavorController::class, 'index']);
     Route::get('/flavor/{flavor}', [FlavorController::class, 'show']);
     Route::delete('/flavor/{flavor}', [FlavorController::class, 'destroy']);
-
+//TEST
+Route::post('server/test', [ResourcesInStackController::class, 'testcreateServer']);
 //protected
 Route::group(['middleware'=>['auth:sanctum']], function() {
     Route::get('/check',[AuthController::class,'check']);
@@ -50,3 +51,4 @@ Route::group(['middleware'=>['auth:sanctum']], function() {
 Route::apiResource('distributions', DistributionController::class);
 
 Route::apiResource('os', OSController::class);
+

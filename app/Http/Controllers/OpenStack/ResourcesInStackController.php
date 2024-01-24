@@ -86,4 +86,13 @@ class ResourcesInStackController extends Controller
         return response()->json($openStackService->getImageDetails($imageId));
     }
 
+    public function testcreateServer(Request $request, OpenStackService $openStackService)
+    {
+        $imageId = $request->input('imageId');
+        $flavorId = $request->input('flavorId');
+        $userId = $request->input('userId');
+
+
+        return response()->json($openStackService->createServer($imageId,$flavorId,$userId));
+    }
 }
