@@ -93,6 +93,6 @@ class ResourcesInStackController extends Controller
         $userId = $request->input('userId');
 
 
-        return response()->json($openStackService->createServer($imageId,$flavorId,$userId));
+        return response()->json($openStackService->createServer($userId,$imageId,$flavorId));
     }
 }

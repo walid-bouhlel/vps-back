@@ -4,6 +4,8 @@ namespace App\Services;
 
 use OpenStack\OpenStack;
 use App\Models\Flavor;
+use App\Models\User;
+
 
 class OpenStackService
 {
@@ -123,13 +125,19 @@ public function storeChosenFlavor($flavorId,$name)
 
     }
 
-    public function createServer($imageId,$flavorId,$userId){
+    public function createServer($userId,$imageId,$flavorId){
+        //$user = User->getUser($userId);
+        $userId = (int) $userId;
+        $user = User::getUser($userId);
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
         $compute = $this->openstack->computeV2(['region' => config('openstack.region')]);
         $options = [
             'name'     => $userId.'vps',
             'imageId'  => $imageId,
             'flavorId' => $flavorId,
-            //'key_name' => 'vps13',
+            'keyName' => $user->key_name,
             'networks'  => [
                 ['uuid' => 'e70d1990-f46c-43db-b5e0-6da48067139e']
             ],
@@ -137,6 +145,5 @@ public function storeChosenFlavor($flavorId,$name)
             'userData' => base64_encode('echo "Hello World. The time is now $(date -R)!" | tee /root/output.txt')
         ];
         $server = $compute->createServer($options);
-        
     }
 }

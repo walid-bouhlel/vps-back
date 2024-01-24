@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "baf36fd257f30a82a7f93b7535fe98a8",
+    "content-hash": "84f8e3a065b3078b6761a8f24da5345c",
     "packages": [
         {
             "name": "brick/math",
@@ -2466,30 +2466,32 @@
         },
         {
             "name": "php-opencloud/openstack",
-            "version": "v3.3.1",
+            "version": "v3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-opencloud/openstack.git",
-                "reference": "5712c307ed148ef700eca856dba0dbc63713afff"
+                "reference": "f3b3c6f7f9ff5259661e06385390bbd3eb2e5cac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/5712c307ed148ef700eca856dba0dbc63713afff",
-                "reference": "5712c307ed148ef700eca856dba0dbc63713afff",
+                "url": "https://api.github.com/repos/php-opencloud/openstack/zipball/f3b3c6f7f9ff5259661e06385390bbd3eb2e5cac",
+                "reference": "f3b3c6f7f9ff5259661e06385390bbd3eb2e5cac",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.0",
-                "guzzlehttp/uri-template": "^0.2|^1.0",
+                "guzzlehttp/psr7": ">=1.7",
+                "guzzlehttp/uri-template": "^0.2 || ^1.0",
                 "justinrainbow/json-schema": "^5.2",
-                "php": "^7.2.5|^8.0"
+                "php": "^7.2.5 || ^8.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.18",
+                "ergebnis/composer-normalize": "^2.0",
+                "friendsofphp/php-cs-fixer": "^3",
                 "php-coveralls/php-coveralls": "^2.0",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpspec/prophecy": "^1.17",
-                "phpunit/phpunit": "^8.0",
+                "phpunit/phpunit": ">=8.5.23 <9.0",
                 "psr/log": "^1.0"
             },
             "type": "library",
@@ -2517,6 +2519,11 @@
                     "name": "Ha Phan",
                     "email": "thanhha.work@gmail.com",
                     "homepage": "https://github.com/haphan"
+                },
+                {
+                    "name": "Konstantin Babushkin",
+                    "email": "koka@idwrx.com",
+                    "homepage": "https://github.com/k0ka"
                 }
             ],
             "description": "PHP SDK for OpenStack APIs. Supports BlockStorage, Compute, Identity, Images, Networking and Metric Gnocchi",
@@ -2529,9 +2536,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-opencloud/openstack/issues",
-                "source": "https://github.com/php-opencloud/openstack/tree/v3.3.1"
+                "source": "https://github.com/php-opencloud/openstack/tree/v3.6.1"
             },
-            "time": "2023-12-20T08:42:59+00:00"
+            "time": "2024-01-18T14:23:28+00:00"
         },
         {
             "name": "phpoption/phpoption",

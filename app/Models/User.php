@@ -55,4 +55,8 @@ class User extends Authenticatable
             'key_fingerprint' => $keyPair['finger_print'],
         ]);
     }
+    public static function getUser(int $userId)
+    {
+        return self::find($userId);
+    }
 }
