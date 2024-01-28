@@ -5,6 +5,7 @@ namespace App\Services;
 use OpenStack\OpenStack;
 use App\Models\Flavor;
 use App\Models\User;
+use OpenStack\Compute\v2\Models\Server;
 
 
 class OpenStackService
@@ -145,5 +146,51 @@ public function storeChosenFlavor($flavorId,$name)
             'userData' => base64_encode('echo "Hello World. The time is now $(date -R)!" | tee /root/output.txt')
         ];
         $server = $compute->createServer($options);
+        $server->retrieve();
+        $serverWithDetails[] = [
+            'id' => $server->id,
+            'name' => $server->name
+        ];
+        return $server;
     }
+
+    public function getServerDetails($serverId)
+    {
+        $compute = $this->openstack->computeV2(['region' => config('openstack.region')]);
+        $server = $compute->getServer(['id' => $serverId]);
+        $server->retrieve();
+        return $server;
+    }
+
+    public function getIpv4Address(Server $server)
+{ 
+
+
+    if (isset($server->addresses['provider'])) {
+        foreach ($server->addresses['provider'] as $address) {
+            if ($address['version'] === 4) {
+                return $ipv4 = $address['addr'];
+            }
+        }
+    }
+  //return $server->status;
+  //return null;
+}
+
+public function getIpv4Addressbyid($serverId)
+{
+    $compute = $this->openstack->computeV2(['region' => config('openstack.region')]);
+        $server = $compute->getServer(['id' => $serverId]);
+        $server->retrieve();
+    if (isset($server->addresses['provider'])) {
+        foreach ($server->addresses['provider'] as $address) {
+            if ($address['version'] === 4) {
+                return $ipv4 = $address['addr'];
+            }
+        }
+    }
+  //return $server->status;
+  //return null;
+}
+
 }

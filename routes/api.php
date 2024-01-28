@@ -39,11 +39,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::delete('/flavor/{flavor}', [FlavorController::class, 'destroy']);
 //TEST
 Route::post('server/test', [ResourcesInStackController::class, 'testcreateServer']);
+Route::get('server/test2', [ResourcesInStackController::class, 'testretrieveServer']);
 //protected
 Route::group(['middleware'=>['auth:sanctum']], function() {
     Route::get('/check',[AuthController::class,'check']);
     Route::post('/logout',[AuthController::class,'logout']);
     Route::resource('/vps',VpsController::class);
+    //Route::get('/vps',[VpsController::class,'index']);
 });
 
 

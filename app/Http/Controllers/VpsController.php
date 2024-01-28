@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Vps;
+use App\Services\OpenStackService;
 
 use Illuminate\Http\Request;
 
@@ -25,9 +27,34 @@ class VpsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, OpenStackService $openStackService)
     {
-        //
+       //
+       $flavorId = $request->input('flavorId');
+       $imageId = $request->input('imageId');
+       $userId = $request->input('userId');
+
+       $server=$openStackService->createServer($userId,$imageId,$flavorId);
+       while ($server->status === 'BUILD') {
+        $server->retrieve();
+        sleep(2);
+        $ipv44 = $openStackService->getIpv4Addressbyid($server->id);
+    }
+
+
+       $vps = new Vps();
+       $vps->instance_id = $server->id;
+       $vps->flavor_id = $flavorId;
+       $vps->image_id = $imageId;
+       $vps->user_id = $userId;
+       $vps->server_name = $server->name;
+       $vps->description = "blabla";
+       $vps->instance = "blabla";
+       $vps->ipv4 = $ipv44;
+       $vps->fill($request->all());
+       $vps->save();
+       return response()->json($vps);
+
     }
 
     /**
@@ -49,9 +76,18 @@ class VpsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id, OpenStackService $openStackService)
     {
-        //
+
+        $vps = Vps::findOrFail($id);
+        $instance_id= $vps->instance_id;
+        $server=$openStackService->getServerDetails($instance_id);
+        $ipv4 = $openStackService->getIpv4Address($server);
+        $vps->update([
+            'ipv4' => $ipv4
+        ]);
+        return response()->json(['message' => 'VPS updated successfully']);
+
     }
 
     /**
