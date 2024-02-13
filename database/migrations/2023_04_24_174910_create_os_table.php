@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('os', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('nameInStack');
-            $table->string('idInStack');
+            $table->string('name_in_stack');
+            $table->string('image_sid')->unique();
             $table->foreignId('distribution_id')->constrained();
             $table->string('version');
             $table->timestamps();

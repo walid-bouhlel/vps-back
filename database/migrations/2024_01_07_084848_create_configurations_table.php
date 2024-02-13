@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('flavors', function (Blueprint $table) {
+        Schema::create('configurations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('flavor_sid')->unique();
+            $table->string('name_in_stack');
             $table->integer('disk');
             $table->integer('ram');
-            $table->integer('swap');
             $table->integer('vcpus');
+            $table->integer('swap')->nullable();
             $table->timestamps();
-            
+
         });
     }
 

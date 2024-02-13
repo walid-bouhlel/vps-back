@@ -18,10 +18,10 @@ use App\Http\Controllers\OSController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "api" middleware group. Make something great!
 |
-*/ 
+*/
     // cmd to show all valid routes : php artisan route:list
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware(['auth:sanctum', 'isAdmin'])->get('/user', function (Request $request) {
     return $request->user();
 });
 //public

@@ -15,8 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('server_name');
+            $table->string('instance_id');
             $table->string('description');
-            $table->string('instance');
+            $table->string('ipv4');
+            $table->string('flavor_sid')->comment('config physic');
+            $table->foreign('flavor_sid')->references('flavor_sid')->on('configurations');
+            $table->string('image_sid')->comment('config logic');
+            $table->foreign('image_sid')->references('image_sid')->on('os');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

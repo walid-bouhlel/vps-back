@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('flavors', function (Blueprint $table) {
-            $table->string('stackId')->nullable()->after('name');
+        Schema::create('distributions', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('logo_path');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('flavors', function (Blueprint $table) {
-            $table->dropColumn('stackId');
-        });
+        Schema::dropIfExists('distributions');
     }
 };

@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->boolean('is_admin')->default(false);
+            $table->string('key_name')->nullable()->comment('key name in openStack');
             $table->text('public_key')->nullable();
             $table->string('public_key_path')->nullable();
             $table->text('private_key')->nullable();
             $table->string('private_key_path')->nullable();
-            $table->string('key_name')->nullable();
-        
+            $table->string('key_fingerprint')->nullable();
         });
     }
 
