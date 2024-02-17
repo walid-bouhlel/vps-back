@@ -24,6 +24,7 @@ class User extends Authenticatable
         'public_key',
         'private_key',
         'key_name',
+        'is_admin',
 
     ];
 
