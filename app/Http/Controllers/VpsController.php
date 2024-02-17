@@ -33,6 +33,9 @@ class VpsController extends Controller
        $flavorId = $request->input('flavorId');
        $imageId = $request->input('imageId');
        $userId = $request->input('userId');
+       $description = $request->input('description');
+       $instance = $request->input('instance');
+
 
        $server=$openStackService->createServer($userId,$imageId,$flavorId);
        while ($server->status === 'BUILD') {
@@ -48,8 +51,8 @@ class VpsController extends Controller
        $vps->image_id = $imageId;
        $vps->user_id = $userId;
        $vps->server_name = $server->name;
-       $vps->description = "blabla";
-       $vps->instance = "blabla";
+       $vps->description = $description;
+       $vps->instance = $instance;
        $vps->ipv4 = $ipv44;
        $vps->fill($request->all());
        $vps->save();
