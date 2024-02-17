@@ -66,7 +66,12 @@ class AuthController extends Controller
 
     public function check()
     {
-       return Auth::user();
+       //return Auth::user();
+       $user=Auth::user();
+       return $this->succes([
+        'user'=> $user,
+        'token' => str_replace('Bearer ','',apache_request_headers()['Authorization'])
+       ]);
     }
 
 }
