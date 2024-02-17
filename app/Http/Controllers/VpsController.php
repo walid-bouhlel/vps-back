@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Vps;
 use App\Services\OpenStackService;
+use App\Http\Resources\VPSResource;
+use Illuminate\Support\Facades\Auth;
+
 
 use Illuminate\Http\Request;
 
@@ -13,7 +16,9 @@ class VpsController extends Controller
      */
     public function index()
     {
-        return response()->json('Vpss of');
+        return VPSResource::collection(
+            Vps::where('user_id', Auth::user()->id)->get()
+        );
     }
 
     /**
