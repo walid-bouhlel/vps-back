@@ -18,7 +18,10 @@ class VPSResource extends JsonResource
             'id' => (string)$this->id,
             'server_name' => $this->server_name,
             'description' => $this->description,
+            'instance' => $this->instance,
             'ipv4' => $this->ipv4,
+            'os_id' => $this->os_id,
+            'config_id' => $this->config_id,
         ];
     }
 }
