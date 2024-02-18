@@ -40,6 +40,9 @@ class VpsController extends Controller
        $userId = $request->input('userId');
        $description = $request->input('description');
        $instance = $request->input('instance');
+       $os_id = $request->input('os_id');
+       $config_id = $request->input('config_id');
+
 
 
        $server=$openStackService->createServer($userId,$imageId,$flavorId);
@@ -59,6 +62,8 @@ class VpsController extends Controller
        $vps->description = $description;
        $vps->instance = $instance;
        $vps->ipv4 = $ipv44;
+       $vps->os_id = $os_id;
+       $vps->config_id = $config_id;
        $vps->fill($request->all());
        $vps->save();
        return response()->json($vps);
