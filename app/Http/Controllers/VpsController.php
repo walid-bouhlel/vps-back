@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 
 class VpsController extends Controller
 {
+
+    public function __construct(OpenStackService $openStackService)
+    {
+        $this->openStackService = $openStackService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -110,4 +115,54 @@ class VpsController extends Controller
     {
         //
     }
+
+    public function start(string $id)
+    {   
+        $vps = Vps::findOrFail($id);
+        $instance_id=$vps->instance_id;
+        $action = $this->openStackService->startserverbyid($instance_id);
+        return response()->json([
+            'success' => true,
+            'data' => $action. 'started',
+        ]);
+    }
+
+    public function stop(string $id)
+    {   
+        $vps = Vps::findOrFail($id);
+        $instance_id=$vps->instance_id;
+        $action = $this->openStackService->stopserverbyid($instance_id);
+        return response()->json([
+            'success' => true,
+            'data' => $action. 'stopped',
+        ]);
+    }
+
+    public function reboot(string $id)
+    {   
+        $vps = Vps::findOrFail($id);
+        $instance_id=$vps->instance_id;
+        $action = $this->openStackService->rebootserverbyid($instance_id);
+        return response()->json([
+            'success' => true,
+            'data' => $action. 'reboot',
+        ]);
+    }
+
+
+    public function status(string $id)
+    {   
+        
+        $vps = Vps::findOrFail($id);
+    
+        $instance_id = $vps->instance_id;
+        $status = $this->openStackService->stateserverbyid($instance_id);
+        
+        return response()->json([
+            'success' => true,
+            'status' => $status,
+        ]);
+        
+    }
+    
 }

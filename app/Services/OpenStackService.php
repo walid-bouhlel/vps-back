@@ -193,4 +193,44 @@ public function getIpv4Addressbyid($serverId)
   //return null;
 }
 
+public function stopserverbyid($serverId)
+{
+    $compute = $this->openstack->computeV2(['region' => config('openstack.region')]);
+        $server = $compute->getServer(['id' => $serverId]);
+        $server->retrieve();
+        $msg=$server->stop();
+        return $msg;
+
+}
+
+public function startserverbyid($serverId)
+{
+    $compute = $this->openstack->computeV2(['region' => config('openstack.region')]);
+        $server = $compute->getServer(['id' => $serverId]);
+        $server->retrieve();
+        $msg=$server->start();
+        return $msg;
+
+}
+
+public function rebootserverbyid($serverId)
+{
+    $compute = $this->openstack->computeV2(['region' => config('openstack.region')]);
+        $server = $compute->getServer(['id' => $serverId]);
+        $server->retrieve();
+        $msg=$server->reboot(\OpenStack\Compute\v2\Enum::REBOOT_HARD);
+        return $msg;
+
+}
+
+public function stateserverbyid($serverId)
+{
+    $compute = $this->openstack->computeV2(['region' => config('openstack.region')]);
+        $server = $compute->getServer(['id' => $serverId]);
+        $server->retrieve();
+        $status=$server->status;
+        return $status;
+}
+
+
 }

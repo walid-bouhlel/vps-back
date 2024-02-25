@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\VpsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FlavorController;
-use App\Http\Controllers\OpenStack\ResourcesInStackController;
-use App\Http\Controllers\DistributionController;
 use App\Http\Controllers\OSController;
+use App\Http\Controllers\VpsController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\FlavorController;
+use App\Http\Controllers\DistributionController;
+use App\Http\Controllers\OpenStack\ResourcesInStackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,9 +46,14 @@ Route::group(['middleware'=>['auth:sanctum']], function() {
     Route::get('/check',[AuthController::class,'check']);
     Route::post('/logout',[AuthController::class,'logout']);
     Route::resource('/vps',VpsController::class);
-    //Route::get('/vps',[VpsController::class,'index']);
+    Route::get('/vps/{id}/stop',[VpsController::class,'stop']);
+    Route::get('/vps/{id}/start',[VpsController::class,'start']);
+    Route::get('/vps/{id}/status',[VpsController::class,'status']);
+    Route::get('/vps/{id}/reboot',[VpsController::class,'reboot']);
 });
 
+//User
+Route::get('/users', [UserController::class,'index']);
 
 
 Route::apiResource('distributions', DistributionController::class);

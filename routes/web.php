@@ -19,6 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('ajax/test',  [AuthController::class, 'test']);
-Route::get('ajax2/test',  [TestController::class, 'index']);
-Route::get('ajax2/test2',  [TestController::class, 'index2']);
-Route::post('ajax2/test3', [TestController::class, 'index3'])->name('store.chosen.flavor');
+//Route::get('ajax2/test',  [TestController::class, 'index']);
+//Route::get('ajax2/test2',  [TestController::class, 'index2']);
+//Route::post('ajax2/test3', [TestController::class, 'index3'])->name('store.chosen.flavor');
