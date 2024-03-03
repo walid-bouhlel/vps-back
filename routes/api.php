@@ -41,15 +41,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //TEST
 Route::post('server/test', [ResourcesInStackController::class, 'testcreateServer']);
 Route::get('server/test2', [ResourcesInStackController::class, 'testretrieveServer']);
+Route::get('/vps/listall',[VpsController::class,'listall']);
 //protected
 Route::group(['middleware'=>['auth:sanctum']], function() {
     Route::get('/check',[AuthController::class,'check']);
     Route::post('/logout',[AuthController::class,'logout']);
     Route::resource('/vps',VpsController::class);
+    
     Route::get('/vps/{id}/stop',[VpsController::class,'stop']);
     Route::get('/vps/{id}/start',[VpsController::class,'start']);
     Route::get('/vps/{id}/status',[VpsController::class,'status']);
-    Route::get('/vps/{id}/reboot',[VpsController::class,'reboot']);
+    Route::get('/vps/{id}/reboot',[VpsController::class,'reboot']);    
 });
 
 //User

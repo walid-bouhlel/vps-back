@@ -26,6 +26,13 @@ class VpsController extends Controller
         );
     }
 
+    public function listall()
+    {
+        return VPSResource::collection(
+            Vps::all()
+        );
+    }
+
     /**
      * Show the form for creating a new resource.
      */
